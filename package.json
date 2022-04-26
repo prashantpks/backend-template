@@ -1,0 +1,14 @@
+{
+  "name": "assignment_backend",
+  "version": "1.0.0",
+  "description": "Assignment for gramoday backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "prashant",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
