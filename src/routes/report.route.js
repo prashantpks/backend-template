@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {v4: uuidv4} = require('uuid');
 const Report = require('../models/report.model');
+const AggReport = require('../models/aggregateReport.model');
+const { response } = require('express');
 
 //ROUTE 1: POST /reports
 router.post('/reports', async (req,res)=>{
@@ -55,7 +57,7 @@ router.get('/reports',async (req, res)=>{
         if(!reports[0]){
             return res.status(400).json({status, message:"report doesn't exist"});
         }else{
-            const {marketID, marketName, cmdtyID, marketType, cmdtyName,repID} = reports[0];
+            const {marketID, marketName, cmdtyID, cmdtyName,repID} = reports[0];
             let prices = [];
             let users = [];
             //console.log(reports);
@@ -66,19 +68,30 @@ router.get('/reports',async (req, res)=>{
             }
 
             const price = calcAvgPrice(prices);
-            const aggregateReport = {
-                _id: repID,
+            const newAggReport = {
+                _id: uuidv4(),
+                repID,
                 cmdtyName,
                 cmdtyID,
                 marketID,
                 marketName,
-                users,
                 timestamp: Date.now(),
-                priceUnit:"Kg",
+                users,
                 price
             };
+
+            const savedAggReport = await AggReport.create(newAggReport);
+            let responseAggReport = JSON.parse(JSON.stringify(savedAggReport));
+            console.log(savedAggReport);
+            delete responseAggReport._id;
+            delete responseAggReport.__v;
+            delete responseAggReport.repID;
+            const id = {_id: repID};
+            responseAggReport = {...id, ...responseAggReport};
+            responseAggReport.timestamp = Date.parse(responseAggReport.timestamp);
+
             // console.log(savedReport);
-            return res.status(200).json(aggregateReport);
+            return res.status(200).json(responseAggReport);
         }
     }catch(err){
        // console.error({status},err.message)
