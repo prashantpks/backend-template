@@ -37,7 +37,7 @@ router.post('/reports', async (req,res)=>{
             convFctr,
             price
         });
-        console.log(savedReport);
+        //console.log(savedReport);
         status = "success";
         return res.status(200).json({status, reportID: repD});
 
@@ -89,7 +89,6 @@ router.get('/reports',async (req, res)=>{
             const id = {_id: repID};
             responseAggReport = {...id, ...responseAggReport};
             responseAggReport.timestamp = Date.parse(responseAggReport.timestamp);
-
             // console.log(savedReport);
             return res.status(200).json(responseAggReport);
         }
