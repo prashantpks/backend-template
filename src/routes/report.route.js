@@ -44,8 +44,7 @@ router.post('/reports', async (req,res)=>{
     }
 });
 
-//ROUTE 2: GET /reports/:reportid
-
+//ROUTE 2: GET /reports?qs
 router.get('/reports',async (req, res)=>{
     let status = "failed";
 
@@ -87,10 +86,12 @@ router.get('/reports',async (req, res)=>{
     }
 });
 
+//Function to convert the price
 function convFctr(price, factor){
     return price/factor;
 }
 
+//Function to calculate average
 function calcAvgPrice(prices){
     let sum = 0;
     for(let x = 0; x<prices.length; x++){

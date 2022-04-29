@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
 const {Schema} = mongoose;
 
+//Schema for report model
 const reportSchema = new Schema({
     _id:{
         type: String,

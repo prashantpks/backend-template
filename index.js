@@ -1,6 +1,5 @@
 const connectToMongo = require('./db');
 const express = require('express')
-const cors = require('cors');
 connectToMongo();
 require('dotenv').config();
 
@@ -11,7 +10,7 @@ app.use(express.json());
 //Available Routes
 app.use('/',require('./src/routes/report.route'));
 
-
+//Listen for connections
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
    console.log(`Currently Listening at http://localhost:${port}`);
