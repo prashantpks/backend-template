@@ -1,8 +1,4 @@
-# Gramoday Assignment
-
-## Problem Statement
-You can read the problem statement [here](https://bit.ly/gramoday-task-backend).
-
+# Backend Template
 
 ## Installation
 * Create a folder in your local system and open the terminal in VS Code or any editor in this folder.
